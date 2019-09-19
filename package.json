@@ -1,5 +1,5 @@
 {
-  "name": "diskusage",
+  "name": "@lls/diskusage",
   "version": "1.1.3",
   "description": "Get total diskspace and free diskspace using bindings around platform specific calls.",
   "main": "index.js",
@@ -7,14 +7,25 @@
   "gypfile": true,
   "dependencies": {
     "es6-promise": "^4.2.5",
-    "nan": "^2.14.0"
+    "nan": "^2.14.0",
+    "prebuild-install": "5.3.2"
   },
   "devDependencies": {
-    "eslint": "^6.0.1"
+    "eslint": "^6.0.1",
+    "prebuild": "^9.1.0",
+    "node-abi": "^2.10.0",
+    "node-gyp": "^5.0.0"
+  },
+  "scripts": {
+    "install": "prebuild-install || node-gyp rebuild",
+    "prebuild-node": "prebuild -t 8.9.0 -t 9.4.0 -t 10.11.0 -t 11.9.0 -t 12.0.0 --strip",
+    "prebuild-node-ia32": "prebuild -t 8.9.0 -t 9.4.0 -a ia32 --strip",
+    "prebuild-electron": "prebuild -t 4.0.4 -t 5.0.0 -t 6.0.0 -t 7.0.0-beta.3 -r electron --strip",
+    "prebuild-electron-ia32": "prebuild -t 4.0.4 -t 5.0.0 -t 6.0.0 -t 7.0.0-beta.3 -r electron -a ia32 --strip"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jduncanator/node-diskusage.git"
+    "url": "https://github.com/lelivrescolaire/node-diskusage.git"
   },
   "keywords": [
     "disk",
@@ -27,10 +38,10 @@
     "free",
     "space"
   ],
-  "author": "jduncanator",
+  "author": "Maximilien DERRIER <max.derrier@lelivrescolaire.fr>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jduncanator/node-diskusage/issues"
+    "url": "https://github.com/lelivrescolaire/node-diskusage/issues"
   },
-  "homepage": "https://github.com/jduncanator/node-diskusage"
+  "homepage": "https://github.com/lelivrescolaire/node-diskusage"
 }

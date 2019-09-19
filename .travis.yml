@@ -1,0 +1,35 @@
+language: node_js
+node_js:
+  - 12
+os:
+  - linux
+  - osx
+cache:
+  directories:
+  - node_modules
+branches:
+  only:
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+compiler: clang-4.0
+env:
+  global:
+    - CCACHE_TEMPDIR=/tmp/.ccache-temp
+    - CCACHE_COMPRESS=1
+    - CC="clang"
+    - CXX="clang++"
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++-5-dev
+notifications:
+  email: false
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: ./ci/prebuild-publish.sh
+  on:
+    node: 12
+    tags: true
+    branch: master
