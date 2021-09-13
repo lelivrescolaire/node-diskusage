@@ -1,46 +1,33 @@
 #include "diskusage.h"
 
-#include <nan.h>
+#include <napi.h>
 #include <stdexcept>
 
-static v8::Local<v8::Object> ConvertDiskUsage(const DiskUsage& usage)
-{
-    v8::Local<v8::Object> obj = Nan::New<v8::Object>();
-    Nan::Set(obj, Nan::New<v8::String>("available").ToLocalChecked(), Nan::New<v8::Number>(static_cast<double>(usage.available)));
-    Nan::Set(obj, Nan::New<v8::String>("free").ToLocalChecked(), Nan::New<v8::Number>(static_cast<double>(usage.free)));
-    Nan::Set(obj, Nan::New<v8::String>("total").ToLocalChecked(), Nan::New<v8::Number>(static_cast<double>(usage.total)));
+static Napi::Object getDiskUsage(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  if (info.Length() != 1) {
+    throw Napi::Error::New(env, "getDiskUsage invalid number of arguments");
+  }
+  if (!info[0].IsString()) {
+    throw Napi::Error::New(env, "getDiskUsage must be called with a single path argument");
+  }
 
-    return obj;
+  Napi::String path = info[0].As<Napi::String>();
+  std::string pathText = path;
+
+  DiskUsage usage = GetDiskUsage(pathText.c_str());
+
+  Napi::Object result = Napi::Object::New(env);
+  result.Set("available", Napi::Number::New(env, static_cast<double>(usage.available)));
+  result.Set("free", Napi::Number::New(env, static_cast<double>(usage.free)));
+  result.Set("total", Napi::Number::New(env, static_cast<double>(usage.total)));
+  return result;
 }
 
-static v8::Local<v8::Value> ConvertSystemError(const SystemError& error)
-{
-    return Nan::ErrnoException(error.errorno(), error.syscall(), error.message(), error.path());
+static Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  exports.Set("getDiskUsage", Napi::Function::New(env, getDiskUsage));
+  return exports;
 }
 
-static NAN_METHOD(GetDiskUsage)
-{
-    Nan::HandleScope scope;
+NODE_API_MODULE(diskusage, Init)
 
-    try {
-        DiskUsage result = GetDiskUsage(*Nan::Utf8String(info[0]));
-        info.GetReturnValue().Set(ConvertDiskUsage(result));
-    }
-    catch (const SystemError &error) {
-        Nan::ThrowError(ConvertSystemError(error));
-    }
-    catch (const std::exception &ex) {
-        Nan::ThrowError(ex.what());
-    }
-}
-
-void Init(v8::Local<v8::Object> exports)
-{
-    Nan::SetMethod(exports, "getDiskUsage", GetDiskUsage);
-}
-
-#if NODE_MAJOR_VERSION >= 10
-NAN_MODULE_WORKER_ENABLED(diskusage, Init)
-#else
-NODE_MODULE(diskusage, Init)
-#endif

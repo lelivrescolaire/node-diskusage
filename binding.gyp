@@ -2,7 +2,7 @@
   'targets': [
     {
       'target_name': 'diskusage',
-      'include_dirs': [ '<!(node -e "require(\'nan\')")' ],
+      'include_dirs': [ "<!@(node -p \"require('node-addon-api').include\")" ],
       'sources': [
         'src/main.cpp',
         'src/diskusage.h',

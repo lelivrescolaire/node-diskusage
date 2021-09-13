@@ -11,9 +11,9 @@ public:
     {}
 
     int errorno() const { return m_errorno; }
-    const char* syscall() const { return m_syscall.c_str(); }
-    const char* message() const { return m_message.c_str(); }
-    const char* path() const { return m_path.c_str(); }
+    std::string syscall() const { return m_syscall; }
+    std::string message() const { return m_message; }
+    std::string path() const { return m_path; }
 
 private:
     int m_errorno;
