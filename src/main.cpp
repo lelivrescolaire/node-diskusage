@@ -39,4 +39,8 @@ void Init(v8::Local<v8::Object> exports)
     Nan::SetMethod(exports, "getDiskUsage", GetDiskUsage);
 }
 
+#if NODE_MAJOR_VERSION >= 10
+NAN_MODULE_WORKER_ENABLED(diskusage, Init)
+#else
 NODE_MODULE(diskusage, Init)
+#endif
