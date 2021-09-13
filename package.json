@@ -9,13 +9,13 @@
   "dependencies": {
     "es6-promise": "^4.2.5",
     "nan": "2.14.1",
-    "prebuild-install": "5.3.5"
+    "prebuild-install": "6.1.4"
   },
   "devDependencies": {
     "eslint": "7.4.0",
-    "node-abi": "2.18.0",
+    "node-abi": "3.0.0",
     "node-gyp": "7.0.0",
-    "prebuild": "10.0.0"
+    "prebuild": "10.0.1"
   },
   "scripts": {
     "install": "prebuild-install || node-gyp rebuild",
