@@ -29,7 +29,7 @@ for:
     ########## UBUNTU SPECIFIC CONFIGURATION ##########
   - matrix:
       only:
-        - image: ubuntu
+        - image: Ubuntu2004
         - fast_finish: true
     environment:
       CCACHE_TEMPDIR: /tmp/.ccache-temp
