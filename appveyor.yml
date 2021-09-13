@@ -47,7 +47,7 @@ for:
       - npm test
 
     deploy_script:
-      - ci\prebuild-publish.sh %nodejs_version%
+      - ci/prebuild-publish.sh %nodejs_version%
 
     ########## OSX SPECIFIC CONFIGURATION ##########
   - matrix:
@@ -70,7 +70,7 @@ for:
       - npm test
 
     deploy_script:
-      - ci\prebuild-publish.sh %nodejs_version%
+      - ci/prebuild-publish.sh %nodejs_version%
 
     ########## Windows SPECIFIC CONFIGURATION ##########
   - matrix:
