@@ -1,8 +1,8 @@
 {
   'targets': [
     {
-       'target_name': '<(module_name)',
-       'include_dirs': [ "<!@(node -p \"require('node-addon-api').include\")" ],
+      'target_name': 'diskusage',
+      'include_dirs': [ "<!@(node -p \"require('node-addon-api').include\")" ],
       'sources': [
         'src/main.cpp',
         'src/diskusage.h',
@@ -43,17 +43,6 @@
             'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES', # -fvisibility=hidden
           }
         }]
-      ]
-    },
-    {
-      "target_name": "action_after_build",
-      "type": "none",
-      "dependencies": [ "<(module_name)" ],
-      "copies": [
-          {
-            "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
-            "destination": "<(module_path)"
-          }
       ]
     }
   ]
