@@ -1,6 +1,6 @@
 @echo off
 
-if %1 == 12 (
+if %1 == 14 (
   if %APPVEYOR_REPO_BRANCH% == master (
     if %GITHUB_TOKEN% neq "" (
       npm run prebuild-node -- -u %GITHUB_TOKEN%
