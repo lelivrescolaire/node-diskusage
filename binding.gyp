@@ -1,8 +1,8 @@
 {
   'targets': [
     {
-      'target_name': 'diskusage',
-      'include_dirs': [ "<!@(node -p \"require('node-addon-api').include\")" ],
+       'target_name': '<(module_name)',
+       'include_dirs': [ "<!@(node -p \"require('node-addon-api').include\")" ],
       'sources': [
         'src/main.cpp',
         'src/diskusage.h',
