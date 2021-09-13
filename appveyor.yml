@@ -1,7 +1,9 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 image:
-  - Visual Studio 2015
+  - Ubuntu2004
+  - Visual Studio 2019
+  - macos
 
 init:
   - git config --global core.autocrlf input
@@ -22,15 +24,68 @@ platform:
   - x86
   - x64
 
-install:
-  - ps: Install-Product node $env:nodejs_version x64
-  - npm install
 
-build: off
+for:
+    ########## UBUNTU SPECIFIC CONFIGURATION ##########
+  - matrix:
+      only:
+        - image: ubuntu
+        - fast_finish: true
+    environment:
+      CCACHE_TEMPDIR: /tmp/.ccache-temp
+      CCACHE_COMPRESS: 1
+      CC: "clang"
+      CXX: "clang++"
+    install:
+      - ps: Install-Product node $env:nodejs_version x64
+      - npm install
+    build: off
 
-test_script:
-  - node --version
-  - npm --version
+    test_script:
+      - node --version
+      - npm --version
+      - npm test
 
-deploy_script:
-  - ci\prebuild-publish.bat %nodejs_version%
+    deploy_script:
+      - ci\prebuild-publish.sh %nodejs_version%
+
+    ########## OSX SPECIFIC CONFIGURATION ##########
+  - matrix:
+      only:
+        - image: macos
+        - fast_finish: true
+    environment:
+      CCACHE_TEMPDIR: /tmp/.ccache-temp
+      CCACHE_COMPRESS: 1
+      CC: "clang"
+      CXX: "clang++"
+    install:
+      - ps: Install-Product node $env:nodejs_version x64
+      - npm install
+    build: off
+
+    test_script:
+      - node --version
+      - npm --version
+      - npm test
+
+    deploy_script:
+      - ci\prebuild-publish.sh %nodejs_version%
+
+    ########## Windows SPECIFIC CONFIGURATION ##########
+  - matrix:
+      only:
+        - image: Visual Studio 2019
+        - fast_finish: true
+    install:
+      - ps: Install-Product node $env:nodejs_version x64
+      - npm install
+    build: off
+
+    test_script:
+      - node --version
+      - npm --version
+      - cmd: npm test
+
+    deploy_script:
+      - ci\prebuild-publish.bat %nodejs_version%
