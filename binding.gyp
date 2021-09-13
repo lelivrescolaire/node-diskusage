@@ -7,6 +7,7 @@
         'src/main.cpp',
         'src/diskusage.h',
       ],
+      'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
       'cflags' : [
         '-std=c++11',
         '-D_GLIBCXX_USE_CXX11_ABI=0'
@@ -35,11 +36,24 @@
           'cflags_cc!': [ '-fno-exceptions' ]
         }],
         ['OS=="mac"', {
+          'cflags+': ['-fvisibility=hidden'],
           'xcode_settings': {
             'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
-            'CLANG_CXX_LIBRARY': 'libc++'
+            'CLANG_CXX_LIBRARY': 'libc++',
+            'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES', # -fvisibility=hidden
           }
         }]
+      ]
+    },
+    {
+      "target_name": "action_after_build",
+      "type": "none",
+      "dependencies": [ "<(module_name)" ],
+      "copies": [
+          {
+            "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
+            "destination": "<(module_path)"
+          }
       ]
     }
   ]
