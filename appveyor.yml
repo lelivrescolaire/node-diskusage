@@ -53,8 +53,8 @@ for:
   - matrix:
       only:
         - image: macos
-        - platform: x64
         - fast_finish: true
+    platform: x64
     environment:
       CCACHE_TEMPDIR: /tmp/.ccache-temp
       CCACHE_COMPRESS: 1
