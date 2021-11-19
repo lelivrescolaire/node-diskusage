@@ -45,7 +45,6 @@ for:
     test_script:
       - node --version
       - npm --version
-      - npm test
 
     deploy_script:
       - ci/prebuild-publish.sh %nodejs_version%
@@ -69,7 +68,6 @@ for:
     test_script:
       - node --version
       - npm --version
-      - npm test
 
     deploy_script:
       - ci/prebuild-publish.sh %nodejs_version%
@@ -87,7 +85,6 @@ for:
     test_script:
       - node --version
       - npm --version
-      - cmd: npm test
 
     deploy_script:
       - ci\prebuild-publish.bat %nodejs_version%
