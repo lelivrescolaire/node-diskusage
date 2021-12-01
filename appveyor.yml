@@ -15,7 +15,7 @@ cache:
 # what combinations to test
 environment:
   matrix:
-    - nodejs_version: 16.9.1
+    - nodejs_version: 16
 branches:
   only:
     - /master|^v\d+\.\d+\.\d+?(-\S*)?$/
@@ -77,7 +77,7 @@ for:
         - image: Visual Studio 2019
         - fast_finish: true
     install:
-      - ps: Install-Product node $env:nodejs_version x64
+      - ps: Install-Product node $env:nodejs_version
       - npm install
     build: off
 
