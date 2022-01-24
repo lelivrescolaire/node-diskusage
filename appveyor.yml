@@ -23,7 +23,7 @@ branches:
 platform:
   - x86
   - x64
-  - arm64e
+  - arm64
 
 
 for:
@@ -54,7 +54,6 @@ for:
       only:
         - image: macos
         - fast_finish: true
-        - platform: x64
     platform: x64
     environment:
       CCACHE_TEMPDIR: /tmp/.ccache-temp
@@ -76,7 +75,6 @@ for:
       only:
         - image: macos
         - fast_finish: true
-        - platform: arm64
     platform: arm64
     environment:
       CCACHE_TEMPDIR: /tmp/.ccache-temp
@@ -100,6 +98,7 @@ for:
       only:
         - image: Visual Studio 2019
         - fast_finish: true
+    platform: x64
     install:
       - ps: Install-Product node $env:nodejs_version
       - npm install
