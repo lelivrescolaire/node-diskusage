@@ -23,6 +23,7 @@ branches:
 platform:
   - x86
   - x64
+  - arm64e
 
 
 for:
@@ -53,7 +54,30 @@ for:
       only:
         - image: macos
         - fast_finish: true
+        - platform: x64
     platform: x64
+    environment:
+      CCACHE_TEMPDIR: /tmp/.ccache-temp
+      CCACHE_COMPRESS: 1
+      CC: "clang"
+      CXX: "clang++"
+    install:
+      - sh: nvm install $nodejs_version
+      - npm install
+    build: off
+
+    test_script:
+      - node --version
+      - npm --version
+
+    deploy_script:
+      - ci/prebuild-publish.sh %nodejs_version%
+  - matrix:
+      only:
+        - image: macos
+        - fast_finish: true
+        - platform: arm64
+    platform: arm64
     environment:
       CCACHE_TEMPDIR: /tmp/.ccache-temp
       CCACHE_COMPRESS: 1
