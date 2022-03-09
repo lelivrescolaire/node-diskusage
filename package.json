@@ -1,7 +1,7 @@
 {
   "name": "@lls/diskusage",
   "private": false,
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Get total diskspace and free diskspace using bindings around platform specific calls.",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "eslint": "7.4.0",
-    "node-abi": "3.5.0",
+    "node-abi": "3.8.0",
     "node-gyp": "7.0.0",
     "prebuild": "11.0.0"
   },
