@@ -1,7 +1,7 @@
 {
   "name": "@lls/diskusage",
   "private": false,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Get total diskspace and free diskspace using bindings around platform specific calls.",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -19,8 +19,8 @@
   },
   "scripts": {
     "install": "prebuild-install || node-gyp rebuild",
-    "prebuild-node": "prebuild -t 16.9.1 --strip",
-    "prebuild-node-ia32": "prebuild -t 16.9.1 -a ia32 --strip",
+    "prebuild-node": "prebuild -t 16.13.0 --strip",
+    "prebuild-node-ia32": "prebuild -t 16.13.0 -a ia32 --strip",
     "prebuild-electron": "prebuild -t 16.0.2 -r electron --strip",
     "prebuild-electron-ia32": "prebuild -t 16.0.2 -r electron -a ia32 --strip"
   },
