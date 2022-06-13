@@ -21,8 +21,8 @@
     "install": "prebuild-install || node-gyp rebuild",
     "prebuild-node": "prebuild -t 16.14.2 --strip",
     "prebuild-node-ia32": "prebuild -t 16.14.2 -a ia32 --strip",
-    "prebuild-electron": "prebuild -t 19.0.0 -r electron --strip",
-    "prebuild-electron-ia32": "prebuild -t 19.0.0 -r electron -a ia32 --strip"
+    "prebuild-electron": "prebuild -t 19.0.0-alpha.1 -r electron --strip",
+    "prebuild-electron-ia32": "prebuild -t 19.0.0-alpha.1 -r electron -a ia32 --strip"
   },
   "repository": {
     "type": "git",
