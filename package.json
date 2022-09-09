@@ -15,7 +15,7 @@
     "eslint": "7.4.0",
     "node-abi": "3.22.0",
     "node-gyp": "7.0.0",
-    "prebuild": "11.0.3"
+    "prebuild": "11.0.4"
   },
   "scripts": {
     "install": "prebuild-install || node-gyp rebuild",
