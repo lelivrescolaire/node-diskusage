@@ -83,6 +83,7 @@ for:
       CXX: "clang++"
     install:
       - sh: nvm install $nodejs_version
+      - python3 -m pip install gyp-next
       - npm install
     build: off
 
