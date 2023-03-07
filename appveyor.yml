@@ -76,7 +76,7 @@ for:
       only:
         - image: Visual Studio 2019
         - fast_finish: true
-    platform: x64
+        - platform: x64
     environment:
       PYTHON: C:\Python310-x64
       PYTHON_VERSION: 3.10
