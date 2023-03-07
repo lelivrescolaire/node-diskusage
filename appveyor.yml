@@ -23,6 +23,7 @@ branches:
 platform:
   - x86
   - x64
+  - arm64
 
 for:
     ########## UBUNTU SPECIFIC CONFIGURATION ##########
