@@ -53,7 +53,8 @@ for:
       only:
         - image: macos
         - fast_finish: true
-    platform: x64
+      exclude:
+        - platform: x86
     environment:
       CCACHE_TEMPDIR: /tmp/.ccache-temp
       CCACHE_COMPRESS: 1
@@ -70,28 +71,6 @@ for:
 
     deploy_script:
       - ci/prebuild-publish.sh %nodejs_version%
-  - matrix:
-      only:
-        - image: macos
-        - fast_finish: true
-    platform: arm64
-    environment:
-      CCACHE_TEMPDIR: /tmp/.ccache-temp
-      CCACHE_COMPRESS: 1
-      CC: "clang"
-      CXX: "clang++"
-    install:
-      - sh: nvm install $nodejs_version
-      - npm install
-    build: off
-
-    test_script:
-      - node --version
-      - npm --version
-
-    deploy_script:
-      - ci/prebuild-publish.sh %nodejs_version%
-
     ########## Windows SPECIFIC CONFIGURATION ##########
   - matrix:
       only:
