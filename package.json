@@ -7,21 +7,21 @@
   "gypfile": true,
   "dependencies": {
     "es6-promise": "^4.2.5",
-    "node-addon-api": "6.0.0",
+    "node-addon-api": "7.1.0",
     "prebuild-install": "7.1.1"
   },
   "devDependencies": {
     "eslint": "8.35.0",
-    "node-abi": "^3.33.0",
-    "node-gyp": "9.3.1",
+    "node-abi": "3.56.0",
+    "node-gyp": "10.0.1",
     "prebuild": "11.0.4"
   },
   "scripts": {
     "install": "prebuild-install || node-gyp rebuild",
-    "prebuild-node": "prebuild -t 16.17.1 --strip",
-    "prebuild-node-ia32": "prebuild -t 16.17.1 -a ia32 --strip",
-    "prebuild-electron": "prebuild -t 22.3.2 -r electron --strip",
-    "prebuild-electron-ia32": "prebuild -t 22.3.2 -r electron -a ia32 --strip"
+    "prebuild-node": "prebuild -t 18.19.0 --strip",
+    "prebuild-node-ia32": "prebuild -t 18.19.0 -a ia32 --strip",
+    "prebuild-electron": "prebuild -t 29.1.0 -r electron --strip",
+    "prebuild-electron-ia32": "prebuild -t 29.1.0 -r electron -a ia32 --strip"
   },
   "repository": {
     "type": "git",
