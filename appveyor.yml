@@ -15,7 +15,7 @@ cache:
 # what combinations to test
 environment:
   matrix:
-    - nodejs_version: 16
+    - nodejs_version: 18
 branches:
   only:
     - /master|^v\d+\.\d+\.\d+?(-\S*)?$/
