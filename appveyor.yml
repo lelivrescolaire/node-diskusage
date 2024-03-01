@@ -1,8 +1,8 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 image:
-  - Ubuntu2004
-  - Visual Studio 2019
+#  - Ubuntu2004
+#  - Visual Studio 2019
   - macos
 
 init:
@@ -22,31 +22,31 @@ branches:
 
 platform:
   - x86
-  - x64
-  - arm64
+  # - x64
+  # - arm64
 
 for:
     ########## UBUNTU SPECIFIC CONFIGURATION ##########
-  - matrix:
-      only:
-        - image: Ubuntu2004
-        - fast_finish: true
-    environment:
-      CCACHE_TEMPDIR: /tmp/.ccache-temp
-      CCACHE_COMPRESS: 1
-      CC: "clang"
-      CXX: "clang++"
-    install:
-      - sh: nvm install $nodejs_version
-      - npm install
-    build: off
+  # - matrix:
+  #     only:
+  #       - image: Ubuntu2004
+  #       - fast_finish: true
+  #   environment:
+  #     CCACHE_TEMPDIR: /tmp/.ccache-temp
+  #     CCACHE_COMPRESS: 1
+  #     CC: "clang"
+  #     CXX: "clang++"
+  #   install:
+  #     - sh: nvm install $nodejs_version
+  #     - npm install
+  #   build: off
 
-    test_script:
-      - node --version
-      - npm --version
+  #   test_script:
+  #     - node --version
+  #     - npm --version
 
-    deploy_script:
-      - ci/prebuild-publish.sh %nodejs_version%
+  #   deploy_script:
+  #     - ci/prebuild-publish.sh %nodejs_version%
 
     ########## OSX SPECIFIC CONFIGURATION ##########
   - matrix:
@@ -72,27 +72,27 @@ for:
     deploy_script:
       - ci/prebuild-publish.sh %nodejs_version%
     ########## Windows SPECIFIC CONFIGURATION ##########
-  - matrix:
-      only:
-        - image: Visual Studio 2019
-        - fast_finish: true
-        - platform: x64
-    environment:
-      PYTHON: C:\Python310-x64
-      PYTHON_VERSION: 3.10
-    init:
-      - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
-    install:
-      - python --version
-      - npm i npm@8 -g
-      - python -m pip install gyp-next
-      - ps: Install-Product node $env:nodejs_version
-      - npm install
-    build: off
+  # - matrix:
+  #     only:
+  #       - image: Visual Studio 2019
+  #       - fast_finish: true
+  #       - platform: x64
+  #   environment:
+  #     PYTHON: C:\Python310-x64
+  #     PYTHON_VERSION: 3.10
+  #   init:
+  #     - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  #   install:
+  #     - python --version
+  #     - npm i npm@8 -g
+  #     - python -m pip install gyp-next
+  #     - ps: Install-Product node $env:nodejs_version
+  #     - npm install
+  #   build: off
 
-    test_script:
-      - node --version
-      - npm --version
+  #   test_script:
+  #     - node --version
+  #     - npm --version
 
-    deploy_script:
-      - ci\prebuild-publish.bat %nodejs_version%
+  #   deploy_script:
+  #     - ci\prebuild-publish.bat %nodejs_version%
