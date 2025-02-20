@@ -15,7 +15,7 @@ cache:
 # what combinations to test
 environment:
   matrix:
-    - nodejs_version: 18
+    - nodejs_version: 20
 branches:
   only:
     - /master|^v\d+\.\d+\.\d+?(-\S*)?$/
@@ -84,7 +84,7 @@ for:
       - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
     install:
       - python --version
-      - npm i npm@8 -g
+      - npm i npm@10 -g
       - python -m pip install gyp-next
       - ps: Install-Product node $env:nodejs_version
       - npm install
